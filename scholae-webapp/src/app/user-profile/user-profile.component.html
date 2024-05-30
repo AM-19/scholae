@@ -1,0 +1,52 @@
+<div class="hero-image">
+    <div class="hero-text">
+        <span class="material-icons">
+            account_circle
+        </span>
+        <h1>{{username}}</h1>
+        <p><span class="text-50">{{emailID}}</span></p>
+        <!-- <span class="text-50">{{mobile}}</span> -->
+        <h6>{{address}}</h6>
+        <h6>Mobile - {{mobile}}</h6>
+    </div>
+</div>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div fxFlex="100%" [formGroup]="editForm" fxLayout="column">
+            <div class="mat-h2" fxLayoutAlign="center center">Edit Profile</div>
+            <div *ngIf="isPasswordInvalid" class="error-message">{{errorMessage}}</div>
+            <div fxLayout="row" fxFlex="100%" fxLayout.xs="column" fxLayoutGap="5%">
+                <mat-form-field appearance="outline" fxFlex="50%">
+                    <mat-label>Email ID</mat-label>
+                    <input class="email" matInput formControlName="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="50%">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                    <mat-hint align="start">Enter Phone Number</mat-hint>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxFlex="100%" fxLayout.xs="column" fxLayoutGap="5%">
+                <mat-form-field appearance="outline" fxFlex="50%">
+                    <mat-label>Current Password</mat-label>
+                    <input formControlName="currentPassword" matInput>
+                    <mat-hint align="start">Enter Currrent Password</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="50%">
+                    <mat-label>New Password</mat-label>
+                    <input formControlName="newPassword" matInput>
+                    <mat-hint align="start">Enter New Password</mat-hint>
+                </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Address</mat-label>
+                <textarea matInput formControlName="address"></textarea>
+                <mat-hint align="start">Enter address</mat-hint>
+            </mat-form-field>
+            <div fxLayoutAlign="end end">
+                <button mat-raised-button class="save-profile" (click)="editUser()">Save
+                    Profile</button>
+            </div>
+        </div>
+    </div>
+</div>

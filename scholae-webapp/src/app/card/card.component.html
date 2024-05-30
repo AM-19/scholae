@@ -1,0 +1,116 @@
+<div>
+  <mat-card class="bookcard">
+    <mat-card-header fxLayout="row" fxLayoutGap="5%">
+      <div class="sub" fxHide fxShow.gt-xs>
+        <img mat-card-image class="book-cover" src={{book.imageUrl}}>
+      </div>
+
+      <div fxLayout="column">
+        <div fxLayout="row">
+
+          <div fxLayout="column" fxFlex="90%">
+            <mat-card-title>
+              {{book?.bookTitle}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{book?.authorName | limitTo : 50}}
+              <!-- {{ book?.authorName | slice:0:50 }}{{ book?.authorName.length > 50 ? '....read more' : '' }} -->
+            </mat-card-subtitle>
+          </div>
+          <div class="favourites" fxFlex="5%">
+            <!-- <button mat-icon-button matTooltip="Add To Favorites">
+              <mat-icon class="borderlight icon-color">favorite_border</mat-icon>
+            </button> -->
+            <button mat-icon-button (click)="toggleFavourites(book.bookTitle)">
+              <mat-icon *ngIf="isFavourite" matTooltip="Remove To Favorites" class="borderlight_like  icon-color">
+                favorite
+              </mat-icon>
+              <mat-icon *ngIf="!isFavourite" matTooltip="Add To Favorites" class="borderlight  icon-color">
+                favorite_border
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="ellipseContent" [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="hover"
+          #popoverTrigger="mdePopoverTrigger" mdePopoverPositionX="after" mdePopoverPositionY="below">
+          {{book?.description | limitTo:170}}
+        </div>
+        
+        <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false" mdePopoverOffsetX="200"
+          mdePopoverArrowOffsetX="10">
+          <mat-card class="pop-card" style="max-width: 300px">
+            <mat-card-header fxLayout="column">
+              <mat-card-title>
+                {{book?.bookTitle}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                 {{book?.authorName}}
+              </mat-card-subtitle>
+              <mat-card-subtitle>
+                Publisher : {{book?.publisher}}
+              </mat-card-subtitle>
+              <div>
+                Genre : {{book?.genre}}
+              </div>
+              <div>
+                Total Page : {{book?.totalPage}}
+              </div>
+              <br>
+            </mat-card-header>
+            <mat-card-content class="description_align">
+              {{book?.description}}
+              <br>
+              <br>
+              <div>
+                <!-- <ngb-rating class="rating" [(rate)]="selected" [max]="5"></ngb-rating> -->
+              </div>
+            </mat-card-content>
+
+          </mat-card>
+        </mde-popover>
+
+      </div>
+    </mat-card-header>
+    <!-- <mat-card-content> -->
+      <div *ngIf="showProgress" fxLayoutAlign="end center">
+        <mat-progress-bar  fxFlex="88%"  mode="determinate" value="{{tracking}}"></mat-progress-bar>
+      </div>
+    <!-- </mat-card-content> -->
+
+    <mat-card-actions>
+      <div fxLayout="row">
+        <div fxLayout="row" fxFlex="90%" fxLayoutGap="3%">
+          <div class="spacing-text-icon" fxLayout="row">
+            <mat-icon class="borderlight icon-color" matTooltip="Download Book"
+              (click)="downloadBook(book.bookUrl,book.bookTitle)">get_app_border
+            </mat-icon>
+            <div class="icon-text">
+              {{book?.totalDownloads}}
+            </div>
+          </div>
+          <div fxLayout="row">
+            <mat-icon class="borderlight icon-color" matTooltip="Total Views">visibility</mat-icon>
+            <div class="icon-text">
+              {{book?.totalViews}}
+            </div>
+          </div>
+          <div fxLayout="row">
+            <mat-icon class="borderlight icon-color" matTooltip="Suggested Reading Time">timer</mat-icon>
+            <div class="icon-text">
+              {{bookReadingTime}} hr
+            </div>
+          </div>
+        </div>
+
+
+        <button mat-icon-button matTooltip="Read Book" matTooltipClass="read-tooltip" class="book-size"
+          (click)="readBook(book.bookUrl,book.bookTitle)">
+          <mat-icon id="book-icon" class="icon-color">
+            menu_book
+          </mat-icon>
+        </button>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+</div>

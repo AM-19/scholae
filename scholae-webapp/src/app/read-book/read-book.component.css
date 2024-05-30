@@ -1,0 +1,47 @@
+ /*styling of pdf viewer tag*/
+ pdf-viewer {
+    display: block;
+    height: 90vh;   
+  }
+ /*styling of oustide container of pdf viewer */
+.pdf-container{
+    max-width: 60%;
+    margin: auto;
+    /* border: solid;  */
+  }
+  .demo{
+    background-color: rgb(68, 63, 63);
+    display:flex;
+    justify-content: space-around;
+  }
+  .col{
+    color: white;
+    margin-top: 1rem;
+  }
+ /*styling of main container div*/  
+.main{ 
+  background-color: lightgrey;
+    height: auto;
+  }
+#pageVariable{
+  background-color: white;
+  width: 4.5rem;
+  height: 2rem;
+  margin: auto;
+  
+}
+ /*styling of buttons*/
+.button{
+      background-color:rgb(192, 187, 187);
+      margin-right: 6px;      
+}
+.button_back{
+  color: white;
+  cursor: pointer;
+}
+/* .complete{
+  color: white;
+}
+.incomplete{
+  color: red;
+} */

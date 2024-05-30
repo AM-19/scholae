@@ -1,0 +1,142 @@
+ .navbar{
+    background-color: #88D317;
+    height: auto;
+    padding: -2rem;
+    background-size: 100%;
+  }
+  .title{
+    font-size: larger;
+  }
+  #scholae{
+    font-family: 'Nerko One', cursive;
+    /* margin-bottom: 1rem; */
+  }
+  mat-card-title{
+    font-family: 'Nerko One', cursive; 
+  }
+  .btn-color {
+    background-color: #88D317;
+    /* margin-top: 4vh;   */
+  }
+  .btn-color-sign{
+    background-color: #88D317;
+    /* margin-left: 1rem; */
+  }
+  .full-width{
+    width: 90%;
+}
+.full{
+  width: 90%;
+}
+  #head{
+    background-color: rgb(244, 248, 250);
+    padding-top: 1vh;
+    padding-bottom: 3vh;
+  }
+  
+  .card_two{
+    opacity: 0.9;
+    margin-right: 2vw;
+    max-height: 55vh;
+    /* width:60%; */
+    text-align: center; 
+  }
+  .card_signup{
+    opacity: 0.9;
+    /* margin-left: -3vw; */
+    max-height: 76vh;
+    /* margin-top: 3vw; */
+    /* width:70%; */
+    margin-right: 2vw;
+    text-align: center;
+  }
+  .main{
+    background: url('../../assets/dark2.jpg') no-repeat center center fixed;
+    max-height: 120vh;
+    background-size: cover;
+    padding: 3vh;
+    width: 100%;
+  }
+  .mat{
+    margin-top: 3rem;
+    width:20% ;
+    height: 33vh;
+    /* background-color: #d9ecbb; */
+    background-color: rgb(15, 14, 14);
+    opacity: 0.9;
+    color: white;
+  }
+  .contain{
+    background: url('../../assets/boy2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 3rem;
+    max-height: 160vh;
+  }
+  .heading{
+    padding-top: 3rem;
+    font-family: 'Nerko One', cursive;
+    text-align: center;
+  }
+  .heading_about{
+    font-family: 'Nerko One', cursive;
+    /* padding-top: 1.5rem; */
+    text-align: center;
+   
+  }
+  .btn-col{
+    background-color: #FFF7C0;
+  }
+  .para-content{
+    text-align: justify;
+    line-height: 25px; 
+    font-size: 18px;
+    margin-top: 3vh;
+  }
+  .email-input{
+    padding-top: 10px;
+}
+  .error_login{
+    color: red;
+    padding-left: 0px;
+    margin-left: 25px;
+    /* margin-bottom: 0.1vw; */
+    /* height: 1vh; */
+    /* position: relative; */
+    width:70% ;
+    text-align: left;
+  }
+
+  .error_register{
+    color: red;
+    padding-left: 0px;
+    margin-bottom: 0.3rem;
+    margin-left: 25px;
+    height: 1vh;
+    position: relative;
+    width:70% ;
+    text-align: left;
+  }
+
+  .register_margin{
+    padding-top: 0.5rem;
+  }
+  .card{
+    background-color: #d9ecbb;
+    opacity: 0.8;
+  }
+  .card-title{
+    font-family: 'Nerko One', cursive;
+    text-align: center;
+  }
+  /* .textSize{
+    font-size: 19px;
+    line-height: 20px;
+  } */
+  .fontStyle{
+    font-family: 'Lateef', cursive;
+    font-size: 27px;
+    line-height: 30px;
+    text-align: justify;
+  }
+  
+  

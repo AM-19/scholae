@@ -1,0 +1,50 @@
+<mat-toolbar class="demo" fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-icon (click)="backToDashboard()" class="material-icons button_back">arrow_back</mat-icon>
+    <p class="col">
+        JumpTo
+        <input [(ngModel)]="pageVariable" type="number" id="pageVariable">
+    </p>
+    <div class="col">
+        {{pageVariable}} / {{totalPage}}
+    </div>
+    <button mat-raised-button class="button" fxHide.xs [disabled]="isCompleteDisabled"
+        (click)="completedReading()">{{completeButtonText}}</button>
+    <button mat-button mat-raised-button class="button" (click)="startAudio()" *ngIf="vol; else pau" fxHide.xs>Summary
+        <mat-icon class="material-icons">volume_up</mat-icon>
+    </button>
+    <ng-template #pau>
+        <button mat-button mat-raised-button class="button" (click)="stopAudio()" fxHide.xs>Stop
+            <mat-icon class="material-icons">stop</mat-icon>
+        </button>
+    </ng-template>
+    <button mat-raised-button class="button" (click)="openDialog()" fxHide.xs>Notes</button>
+
+    <!--for smaller devices-->
+    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #dropMenu="matMenu">
+        <button mat-menu-item class="button" ngClass="{{markCompleted}}" [disabled]="isCompleteDisabled"
+            (click)="completedReading()">{{completeButtonText}}</button>
+        <button mat-menu-item class="button" (click)="startAudio()" *ngIf="first; else second">Summary<mat-icon
+                class="material-icons">volume_up</mat-icon></button>
+        <ng-template #second>
+            <button mat-menu-item class="button" (click)="stopAudio()">Stop
+                <mat-icon class="material-icons">stop</mat-icon>
+            </button>
+        </ng-template>
+        <button mat-menu-item class="button" (click)="openDialog()">Notes</button>
+        <mat-divider></mat-divider>
+    </mat-menu>
+</mat-toolbar>
+<div class="main">
+    <div class="jump">
+    </div>
+    <div class="pdf-container">
+        <pdf-viewer (after-load-complete)="callBackFn($event)" type="file" id="file" [src]="bookPdf"
+            [original-size]="false" [(page)]="pageVariable" [show-all]="true" [show-borders]="true"
+            [zoom-scale]=page-fit [render-text-mode]="1" useBrowserLocale="true" [stick-to-page]="true">
+        </pdf-viewer>
+    </div>
+</div>
+<!-- (change)="onselect()"-->

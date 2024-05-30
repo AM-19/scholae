@@ -1,0 +1,56 @@
+.brute{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    
+}
+.mat-h2{
+    margin-bottom: 0px;
+    
+    
+}
+.btni{
+    margin-top: 0px;
+    margin-bottom: 9px;
+    
+}
+.add-button{
+    margin-left: 550px;
+    background-color: gainsboro;
+    margin-top: 0px;
+    
+}
+.close{
+    margin-left: 550px;
+    background-color: cornsilk;
+    color: black;
+   
+    
+}
+p{
+    font-family: 'Nerko One', cursive;
+    
+}
+.title{
+ display: flex;
+ flex-direction: row;
+}
+.nothing{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    font-weight: bold;
+}
+input{
+    padding:1px;
+}
+.note-content{
+    text-align: center;
+}
+.buttonadd{
+    /* background-color:#88D317; */
+}
+.closebtn{
+    margin-left:575px;
+}

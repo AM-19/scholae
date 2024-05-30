@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "role": "ADMIN",
+      "action": [
+        {
+          "name": "Home",
+          "scope": []
+        },
+        {
+          "name": "UploadBook",
+          "scope": [
+            "upload_book"
+          ]
+        },
+        {
+          "name": "KibanaSearch",
+          "scope": [
+            "create_query"
+          ]
+        },
+        {
+          "name": "ReadBook",
+          "scope": [
+            "view_readbooks"
+          ]
+        }
+
+      ]
+    },
+    {
+      "role": "LEARNER",
+      "action": [
+        {
+          "name": "Home",
+          "scope": []
+        },
+        {
+          "name": "ReadBook",
+          "scope": [
+            "view_readbooks"
+          ]
+        }
+      ]
+    }
+
+  ]
+}

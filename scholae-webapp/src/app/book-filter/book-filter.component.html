@@ -1,0 +1,45 @@
+<button mat-flat-button mattooltip="Filter Submissions" [disabled]="isDisplay" (click)="toggleDisplay()">
+  <!-- <span> -->
+    <i class="material-icons"> tune </i>
+    Filter Books
+    <!-- <span class="word-icon"> Filter Books</span>
+  </span> -->
+</button>
+<div *ngIf="isDisplay" fxlayout="column">
+  <mat-card class="mat-elavation-z16">
+    <div fxlayout="row" fxLayoutAlign="end center">
+      <button color="accent" mattooltip="clear and close refine" class="mat-mini-fab mat-button-base"
+        (click)="closeFilter()">
+        <span class="mat-button-wrapper">
+          <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color">
+            close
+          </mat-icon>
+        </span>
+      </button>
+    </div>
+
+    <mat-card-content class="mat-card-content" fxLayout="column">
+      <div fxFlex="100%"   fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%" [formGroup]="filterForm">
+          <mat-form-field class="full-width" appearance="outline" fxFlex="30%">
+            <mat-label>Book Title</mat-label>
+            <input formControlName="bookTitle" matInput />
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="outline" fxFlex="30%"> 
+            <mat-label>Author</mat-label>
+            <input matInput formControlName="bookAuthor" />
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="outline" fxFlex="30%">
+            <mat-label>Book Content</mat-label>
+            <input matInput formControlName="bookContent" />
+          </mat-form-field>
+      </div>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+        <div class="apply-button">
+          <button  mat-raised-button [disabled]="filterForm.invalid" (click)="filterUser()" class="btn-clr" >
+            APPLY
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

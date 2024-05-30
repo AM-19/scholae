@@ -1,0 +1,59 @@
+<div mat-dialog-title class="title">
+    <mat-icon class="material-icons">add_box</mat-icon>
+    {{username}}'s Notes
+</div>
+
+
+<div mat-dialog-content>
+    <div [formGroup]="form" class="brute">
+        <mat-form-field appearance="outline" >
+            <mat-label>Note Title</mat-label>
+            <input matInput formControlName="noteTitle"> 
+            <mat-error>
+                Note Title Required 
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+            <mat-label>Note Description</mat-label>
+            <textarea matInput formControlName="noteContent"></textarea> 
+            <mat-error>
+                Note Description Required 
+            </mat-error>
+            
+        </mat-form-field>
+        </div>
+        <div class="btni">
+        <button class="add-button buttonadd" mat-button  [disabled]="form.invalid" (click)="submit()">Add Note</button>
+        </div>
+        
+    <div *ngIf="panel.length >0; else noNote" >
+    <div class="mat-h2">Added Notes</div>    
+    <mat-accordion >
+        <mat-expansion-panel *ngFor='let panel of panel;let i = index;'>
+            <mat-expansion-panel-header>
+                <mat-panel-description>
+                {{panel.noteTitle}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            {{panel.noteContent}}
+            <!-- <mat-action-row>
+                <button mat-button (click)="removeMe(i)"><mat-icon class="material-icons">delete</mat-icon></button>
+            </mat-action-row> -->
+            
+            </mat-expansion-panel>
+            
+            
+    </mat-accordion>
+ 
+</div>
+</div>
+<ng-template #noNote>
+    <div class="mat-h2 note-content" >No notes added yet!
+        <!-- <mat-icon class="material-icons">sentiment_very_dissatisfied</mat-icon> -->
+    </div>
+    </ng-template>
+<div mat-dialog-actions>
+    <button mat-button class="add-button closebtn" matDialogClose>Close</button>
+    <!-- <button class="close" matDialogClose>Close</button> -->
+</div>
