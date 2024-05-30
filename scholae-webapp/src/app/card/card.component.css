@@ -1,0 +1,65 @@
+.bookcard {
+    margin-bottom: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+    /* height: 25%; */
+    /* margin-top: 55px; */
+    border-style: solid;
+    border-color: black;
+    /* border-radius: 15px;  */
+  }
+.borderlight{
+    font-size: 32px;
+    
+  }
+.icon-text{
+    font-size: 17px;
+    margin-top: 4px;
+    margin-left: 10px;
+  }
+.book-size{
+    /* margin-left: 8.7em; */
+    font-size: 60px;
+  }
+
+  .spacing-text-icon{
+    margin-right: 12px;
+  }
+  #book-icon{
+    font-size: 36px;
+  }
+  .ellipseContent{
+    text-align: justify;
+    
+  }
+  .ellipseContent:hover {
+    overflow: visible;
+    white-space: normal;
+  }
+  .pop-card{
+  
+    background-color: whitesmoke;
+  }
+  .sub{
+    margin-top: 12px;
+    /* max-width: 175px;
+    min-height: 175px; */
+  }
+  .book-cover{
+    min-height: 150px;
+    max-width: 150px;
+  }
+  .icon-color{
+    color: #5b5b5b;
+  }
+  .borderlight_like{
+    font-size: 32px;
+    color: red;
+  }
+  button{
+    outline:none;  
+ }
+ .description_align{
+   text-align: justify;
+ }
+ 

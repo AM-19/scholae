@@ -1,0 +1,70 @@
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+    static_configs:
+    - targets: ['172.31.22.57:9090']
+
+  - job_name: 'eureka-server'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8085']
+
+  - job_name: 'user-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8090']
+    
+  - job_name: 'book-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8095']
+    
+  - job_name: 'auth-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8070']
+    
+  - job_name: 'bookquery-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8050']
+    
+  - job_name: 'nlp-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8060']
+    
+  - job_name: 'bookrecommendation-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8063']
+    
+  - job_name: 'apigateway'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['172.31.22.57:8080']
+    
+

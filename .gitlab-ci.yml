@@ -1,0 +1,66 @@
+image: maven:3-jdk-11
+before_script:
+  - apt-get update -qq && apt-get install
+
+cache:
+  key: "maven3"
+  paths:
+    - .m2/repository
+
+variables:
+  SONAR_URL: "http://jenkins-immersive.stackroute.in:9000/"
+  SONAR_LOGIN: "admin"
+  SONAR_PASSWORD: "admin"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+stages:
+  - build
+  - test
+  - package
+  - test_quality
+
+maven_job:
+  stage: build
+  script:
+    - mvn clean install
+#  only:
+#    - master
+#    - v1.0.0
+#    - v1.0.1
+#    - v1.0.2
+#    - v1.0.3
+
+maven_build:
+  stage: package
+  script: mvn clean package
+#  only:
+#    - master
+#    - v1.0.0
+#    - v1.0.1
+#    - v1.0.2
+#    - v1.0.3
+
+  artifacts:
+    paths:
+      - /target/*.jar
+
+code_coverage:
+  stage: test
+#  only:
+#    - master
+#    - v1.0.0
+#    - v1.0.1
+#    - v1.0.2
+#    - v1.0.3
+
+  script:
+    - "mvn clean test"
+    - "mvn jacoco:report"
+    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/",instructions, "instructions covered"; print 100*covered/instructions, "% covered" }'
+  coverage: '/Code coverage: \d+\.\d+/'
+  artifacts:
+    paths:
+      - target/site/jacoco/
+
+
+

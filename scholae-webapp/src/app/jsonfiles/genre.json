@@ -1,0 +1,15 @@
+[
+    {"name": "Comedy"},
+    {"name": "Horror"},
+    {"name": "Thriller"},
+    {"name": "Science"},
+    {"name": "Romance"},
+    {"name": "Sci-fi"},
+    {"name": "Biography"},
+    {"name": "Action and Adventure"},
+    {"name": "Technology"},
+    {"name": "History"},
+    {"name": "Politics"},
+    {"name": "Educational"},
+    {"name": "Health"}
+]

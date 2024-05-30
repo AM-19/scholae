@@ -1,0 +1,47 @@
+
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.mat-sidenav {
+    width: 280px;
+    padding:15px;
+}
+.navbar{
+    justify-content: space-between;
+    background-color: #88D317;
+}
+
+span{
+    padding-right: 1rem;
+}
+.mat-drawer { 
+    background-color: white;
+    color:#fff
+}
+.main-content {
+    padding:20px;
+}
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+.title{
+    font-size: 20px;
+}
+
+.dropdown-menu{
+    right: 0;
+  left: auto;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.profile_button{
+    border: none;
+}
+.avatar-margin{
+    margin-left: 1px;
+}
+.material-icons{
+    color: #5b5b5b;
+} 
+.tool{
+    background-color: lightgrey;
+}

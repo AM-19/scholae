@@ -1,0 +1,56 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="over" #sidenav>
+    <mat-toolbar>
+      <mat-toolbar-row class="tool">
+        <span>
+          <img src="../../assets/LogoMakr-5g15qC.png" width="50" height="30" class="d-inline-block align-top"
+            alt="logo">
+        </span>
+        <h2>Scholae</h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let menuItems of menuGroupsToBeDisplayed" (click)="sidenav.close()"
+        [routerLink]=menuItems.route>
+        <span class="material-icons">
+          {{menuItems.icon}}
+        </span>{{menuItems.menu}}</a>
+      <!-- <a mat-list-item [routerLink]="'/dashboard'">Home </a>
+          <a mat-list-item [routerLink]="'/dashboard/upload'"><span class="material-icons">
+            post_add
+            </span> Upload Book </a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="navbar">
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.open()">menu</mat-icon>
+      </button>
+      <h1>Scholae</h1>
+      <!-- <button mat-icon-button [disableRipple]="true" (click)="home()">
+            <div class="title">Scholae</div>
+          </button> -->
+      <span class="toolbar-spacer"></span>
+      <div fxHide fxShow.gt-xs>
+        {{username}}
+      </div>
+      <div class="row avatar-margin">
+        <div class="col">
+
+          <ngx-avatar name="{{username}}" size="40" [round]="true" id="dropdownBasic1" [matMenuTriggerFor]="profile"
+            borderColor="white" fgColor="black"></ngx-avatar>
+          <mat-menu #profile="matMenu">
+            <button mat-menu-item (click)="userProfile()">
+              <mat-icon>account_circle_outlined</mat-icon>User Profile
+            </button>
+            <button mat-menu-item (click)="onLogout()">
+              <mat-icon>logout_icon</mat-icon>Log Out
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

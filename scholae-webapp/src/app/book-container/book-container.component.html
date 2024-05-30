@@ -1,0 +1,123 @@
+<!-- <div fxLayout="row">
+  <div class="filter filter-margin">
+    <app-book-filter (isSelected)="closeSearch($event)" (filteredBook)="filterBooks($event)"></app-book-filter>
+  </div>
+  <div class="wrap" *ngIf="isSearch">
+    <div class="search">
+      <form [formGroup]="searchForm">
+        <input type="text" class="searchTerm" placeholder="Search" formControlName="searchBar"
+          (keydown.enter)="onSearch()">
+      </form>
+      <button type="submit" class="closeButton" (click)="clearSearch()">
+        <i class="fa fa-close"></i>
+      </button>
+      <button type="submit" class="searchButton" (click)="onSearch()">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
+</div> -->
+<div fxLayout="row" class="filter-margin">
+  <div fxFlex="100%">
+    <app-book-filter (isSelected)="closeSearch($event)" (filteredBook)="filterBooks($event)"
+      (filterClose)="closeFilter($event)"></app-book-filter>
+  </div>
+</div>
+<div *ngIf="isSearch" fxLayoutAlign="center center">
+  <div fxLayout="row" class="searchBar">
+    <form [formGroup]="searchForm">
+      <input type="text" placeholder="Search" class="searchTerm" formControlName="searchBar"
+        (keydown.enter)="onSearch()">
+    </form>
+    <button type="submit" class="closeButton" (click)="clearSearch()">
+      <i class="fa fa-close"></i>
+    </button>
+    <button type="submit" class="searchButton" (click)="onSearch()">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>
+
+<div fxLayout="row wrap" fxLayout.xs="column" Laclass="padding">
+  <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="onChange($event)" mat-stretch-tabs
+    mat-align-tabs="end" dynamicHeight fxFill fxFlex="100%">
+    <mat-tab label="home">
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <span class="material-icons">
+            assistant
+          </span>
+        </mat-icon>
+        Home
+      </ng-template>
+      <ng-template matTabContent>
+        <div *ngIf="showSpinner; else entireDashboard" fxLayoutAlign="center center">
+          <mat-spinner></mat-spinner>
+        </div>
+        <ng-template #entireDashboard>
+          <div fxFlex="96%" fxLayout="row wrap" fxLayout.xs="column" Laclass="padding"
+            *ngIf="allBooks?.length>0; else noSearchResults">
+            <app-card *ngFor="let book of allBooks" [book]="book" [showProgress]="false" [tabIndex]="0" fxFlex.xs="100%"
+              fxFlex.sm="100%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%" fxFlex="50%"></app-card>
+          </div>
+          <ng-template #noSearchResults>
+            <div class="mat-h1 no-books" fxLayoutAlign="center center">
+              No books found.
+            </div>
+          </ng-template>
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="reading">
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <span class="material-icons">
+            chrome_reader_mode
+          </span>
+        </mat-icon>
+        My Reads
+      </ng-template>
+      <div *ngIf="showReadingSpinner; else readingDashboard" fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+      </div>
+      <ng-template #readingDashboard>
+        <div fxFlex="96%" fxLayout="row wrap" fxLayout.xs="column" Laclass="padding"
+          *ngIf="readingBooks?.length>0; else noReadingBooks">
+          <app-card *ngFor="let book of readingBooks" [book]="book" [showProgress]="true" [tabIndex]="1"
+            fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%" fxFlex="50%"></app-card>
+        </div>
+        <ng-template #noReadingBooks>
+          <div class="mat-h1 no-books" fxLayoutAlign="center center">
+            Books will appear when you start reading.
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="recommended">
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <span class="material-icons">
+            favorite_border
+          </span>
+        </mat-icon>
+        Recommendations
+      </ng-template>
+      <div *ngIf="showRecommendationSpinner; else recommendationDashboard" fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+      </div>
+      <ng-template #recommendationDashboard>
+        <div fxFlex="96%" fxLayout="row wrap" fxLayout.xs="column" Laclass="padding"
+          *ngIf="recommendatioBooks?.length>0; else mostViews">
+          <app-card *ngFor="let book of recommendationBooks" [book]="book" [showProgress]="false" [tabIndex]="2"
+            fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%" fxFlex="50%"></app-card>
+        </div>
+        <ng-template #mostViews>
+          <div fxFlex="96%" fxLayout="row wrap" fxLayout.xs="column" Laclass="padding">
+            <app-card *ngFor="let book of mostViewedBooks" [book]="book" [showProgress]="false" [tabIndex]="2"
+              fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%" fxFlex="50%"></app-card>
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

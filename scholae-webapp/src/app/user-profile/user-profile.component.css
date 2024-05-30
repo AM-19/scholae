@@ -1,0 +1,37 @@
+
+body {
+    background: rgb(99, 39, 120);
+    
+}
+
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1934&q=80.jpg");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    
+  }
+  .material-icons{
+      font-size: 100px;
+  }
+  .email{
+      background-color: white
+  }
+  .save-profile,.change-password{
+      background-color:  #88D317;
+  }
+  .error-message{
+    color: red;
+    margin-bottom: 8px;
+    margin-left: 15px;
+}

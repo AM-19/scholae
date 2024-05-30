@@ -1,0 +1,208 @@
+<!--header starts here-->
+<mat-toolbar class="navbar">
+    <div class="navbar-brand" href="#">
+        <img src="../../assets/LogoMakr-5g15qC.png" width="50" height="30" class="d-inline-block align-top" alt="logo">
+        Scholae
+    </div>
+    <div>
+        <button mat-raised-button type="button" (click)="openRegister()" *ngIf="one; else two">Sign Up</button>
+        <ng-template #two>
+            <button mat-raised-button type="button" (click)="openLogin()">Log In</button>
+        </ng-template>
+    </div>
+</mat-toolbar>
+<!--header ends here-->
+<!--upper contents starts here-->
+<div class="main" fxLayoutAlign="space-around center">
+    <!-- <div class="container">  -->
+    <div fxLayout="row" fxLayout.xs="column" fxFlex="100%">
+        <div fxFlex="75" fxLayoutAlign="center end">
+            <div>
+                <h3 class="text-white">Scholae</h3>
+                <p class="text-white fontStyle">
+                    Reading the books meant more than just going through content
+                    It meant facing the mirrors for passion of reading that was being long avoided.
+                    Stream unlimited novels, fictions, sci-fy, academics and
+                    many more books any-time , anywhere , absolutely free.
+                </p>
+            </div>
+        </div>
+        <div fxFlex="35%" fxLayoutAlign="center end" fxLayout="column" fxFlex.xs="100%">
+            <mat-card class="card_two" *ngIf="test; else signup">
+                <div mat-card-content>
+                    <h2>LOGIN</h2>
+                    <div class="error_login" *ngIf="showLoginErrorMessage">{{loginErrorMessage}}</div>
+                    <div [formGroup]="loginForm" (click)="onClear()">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email">
+                            <mat-hint align="start">Enter valid email id</mat-hint>
+                            <mat-error>
+                                Email Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput formControlName="password" type="password" size="30">
+                            <mat-hint align="start">Min 5 characters</mat-hint>
+                            <mat-error>
+                                Password Required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button class="btn-color" mat-raised-button [disabled]="loginForm.invalid"
+                            (click)="loginUser()">Login</button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <ng-template #signup>
+            <!-- <div fxFlex="70%" fxLayoutAlign="center end" fxLayout="column" fxFlex.xs="100%">  -->
+            <mat-card class="card_signup">
+                <div mat-card-content>
+                    <h2>SIGNUP</h2>
+                    <div class="error_register" *ngIf="showRegisterErrorMessage">{{registerErrorMessage}}</div>
+                    <div class="register_margin" [formGroup]="signForm" (click)="onClear()">
+                        <mat-form-field appearance="outline" class="full">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="emailId">
+                            <mat-hint align="start">Enter valid email id</mat-hint>
+                            <mat-error>
+                                Email Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full">
+                            <mat-label>Phone Number</mat-label>
+                            <input #inputOne matInput formControlName="phoneNumber" maxlength="10">
+                            <mat-hint align="start">Maximum 10 digits</mat-hint>
+                            <mat-hint align="end">
+                                <span *ngIf="inputOne.value.length < 5"
+                                    style="color: red;">{{inputOne.value?.length}}</span>
+                                <span *ngIf="inputOne.value.length >= 5"
+                                    style="color: green;">{{inputOne.value?.length}}</span> / 10
+                            </mat-hint>
+                            <mat-error>
+                                Phone number Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full">
+                            <mat-label>Password</mat-label>
+                            <input #input matInput formControlName="passwordId" minlength="5">
+                            <mat-hint align="start">Min 5 characters</mat-hint>
+                            <mat-error>
+                                Password Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="full">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput formControlName="confirmPassword" minlength="5">
+                            <mat-hint align="start">Min 5 characters</mat-hint>
+                            <mat-error>
+                                Confirm Password Required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-around">
+                        <span><button mat-raised-button (click)="resetUser()">RESET</button></span>
+                        <span><button mat-raised-button [disabled]="signForm.invalid" (click)="registerUser()"
+                                class="btn-color-sign">SUBMIT</button></span>
+                    </div>
+
+                </div>
+            </mat-card>
+            <!-- </div>   -->
+        </ng-template>
+        <!-- </div>   -->
+    </div>
+</div>
+<!--upper contents end here-->
+<!--content for readinfo starts here-->
+<div id="head">
+    <div class="container">
+        <div class="col-12">
+            <h2 class="heading">Read Your Favourite Book</h2>
+        </div>
+        <hr>
+        <div class="col-12">
+            <p class="para-content fontStyle">We at Scholae believes that any "book that helps a child to form a habit of
+                    reading, to make reading one of his needs, is good for him". Whenever you read a good book,
+                somewhere in the world a door opens to allow in more light. Reading is to the mind what exercise is to
+                the body thus learn and never stop reading.</p>
+        </div>
+    </div>
+</div>
+<!--content for readinfo ends here-->
+<!--three cards starts here-->
+<div id="head">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 py-2">
+                <div class="card h-100 text-black">
+                    <div class="card-body">
+                        <h3 class="card-title">Scholae Read Fest</h3>
+                        <p class="card-text fontStyle">We at Scholae believes that any " book that helps a child to form a habit
+                            of reading, to make reading one of his needs, is good for him". Whenever you read a good
+                            book,somewhere in the world a door opens to allow in more light.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 py-2">
+                <div class="card h-100 text-black">
+                    <div class="card-body">
+                        <h3 class="card-title">What's waiting for you</h3>
+                        <p class="card-text fontStyle">There's always something new to discover, and new books added every week!
+                            Over 10000 books top trending and full length books . Scholae has an extensive library of
+                            feature books, novels, award-winning biographies originals, and more.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 py-2">
+                <div class="card h-100 text-black">
+                    <div class="card-body">
+                        <h3 class="card-title">How much Scholae cost</h3>
+                        <p class="card-text fontStyle">Nothing, read Scholae on your smartphone, tablet, laptop, or streaming
+                            device, all for free. No extra costs, no contracts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--three cards ends here-->
+<!--About content starts here-->
+<div class="contain">
+    <div class="container">
+        <h1 class="heading_about">About</h1>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="" alt="">
+
+                    <div class="card-body">
+                        <h3 class="card-title">Vision</h3>
+                        <p class="card-text fontStyle">
+                            Transforming individual reading habits into passion so that individuals can efficiently
+                            enjoy digital reading ease.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Origin</h3>
+                        <p class="card-text fontStyle">
+                            Established in November 2020,
+                            Scholae provides disruptive reading solutions on academics, novels and various genre. Our
+                            featured books are for passion-oriented and reading lovers
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--About content ends here-->

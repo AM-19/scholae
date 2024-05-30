@@ -1,0 +1,210 @@
+version: '3.5'
+
+services:
+  eurekaserver:
+    build: eureka-server/
+    container_name: eurekaserver
+    restart: always
+    ports:
+      - 8085:8085
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=kidsjoyment
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./Data/elasticsearch:/usr/share/elasticsearch/data
+
+  neo4j:
+    image: neo4j:4.0.9
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./Data/neo4j/data:/var/lib/neo4j/data
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - ./Data/mongo:/data/db
+    ports:
+      - 27017:27017
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    volumes:
+      - ./Data/mysql:/var/lib/mysql
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+
+  authservice:
+    build: authentication-service
+    container_name: authservice
+    restart: always
+    ports:
+      - 8070:8070
+    depends_on:
+      - eurekaserver
+      - db
+      - rabbitmq
+#      - configserver
+    links:
+      - eurekaserver
+      - rabbitmq
+      - db
+    environment:
+      - SPRING_APPLICATION_NAME=authservice
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8085/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/testdb?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+
+  userservice:
+    build: user-service
+    container_name: userservice
+    ports:
+      - 8090:8090
+    restart: always
+    depends_on:
+      - eurekaserver
+      - mongodb
+      - rabbitmq
+ #     - configserver
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8085/eureka
+    links:
+      - mongodb
+      - rabbitmq
+
+  bookservice:
+    build: book-service/
+    container_name: bookservice
+    ports:
+      - 8095:8095
+    restart: always
+    depends_on:
+      - eurekaserver
+      - elasticsearch
+#    - configserver
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8085/eureka
+    links:
+      - elasticsearch
+      - eurekaserver
+
+  recommendationservice:
+    build: bookrecommendation-service/
+    container_name: recommendationservice
+    depends_on:
+      - eurekaserver
+      - bookservice
+      - neo4j
+#      - configserver
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8085/eureka
+    ports:
+      - 8063:8063
+    links:
+      - neo4j
+      - eurekaserver
+      - bookservice
+
+  bookqueryservice:
+    build: bookquery-service/
+    container_name: bookqueryservice
+    ports:
+      - 8050:8050
+    depends_on:
+      - eurekaserver
+      - bookservice
+#      - config server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8085/eureka
+    links:
+      - eurekaserver
+      - bookservice
+
+  nlpservice:
+    build: nlp-service/
+    container_name: nlpservice
+    ports:
+      - 8060:8060
+    depends_on:
+      - eurekaserver
+      - bookservice
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8085/eureka
+    links:
+      - eurekaserver
+      - bookservice
+
+
+  api-gateway:
+    build: api-gateway/
+    container_name: api-gateway
+    depends_on:
+      - userservice
+      - authservice
+      - eurekaserver
+      - bookservice
+      - recommendationservice
+      - bookqueryservice
+      - nlpservice
+#      - configserver
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8085/eureka
+    ports:
+      - 8080:8080
+    links:
+      - userservice
+      - authservice
+      - eurekaserver
+      - bookservice
+      - recommendationservice
+      - bookqueryservice
+      - nlpservice
+
+  scholae-webapp:
+    build: scholae-webapp/
+    container_name: scholaewebapp
+    restart: always
+    ports:
+      - 4200:4200
+
+
